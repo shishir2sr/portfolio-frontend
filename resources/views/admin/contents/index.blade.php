@@ -17,6 +17,7 @@
     content="mobile app development, problem-solving, architecture, data structures, algorithms, UI design, clean code, test-driven development, flutter, iOS, SwiftUI, Swift, Dart, Machine-Laerning " />
   <meta name="developer" content="Yeasir Arefin Tusher">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
   <!-- FAV AND ICONS   -->
@@ -258,13 +259,14 @@
   </div>
 
   <!-- jQuery for popup -->
-<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
  Popper JS 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
  Bootstrap JS -
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
 
-
+<!--<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
 
 <script>
 

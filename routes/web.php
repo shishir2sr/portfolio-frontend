@@ -61,6 +61,7 @@ Route::group(['namespace'=>'Admin'],function(){
     });
 });
 Route::get('load-more-data', [WhatIDoController::class,'loadMoreData'])->name('load.more');
+//Route::get('/pagination', [AdminAuthController::class,'getLogin'])->name('pagination');
 
 /*Route::get('/', function () {
     return view('index');

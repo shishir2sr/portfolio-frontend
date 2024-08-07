@@ -17,41 +17,61 @@ use App\Models\WhatIDo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Log;
 
 
 
 class AdminAuthController extends Controller
 {
     //
-    public function getLogin(){
+    public function getLogin(Request $request){
        
+      // dd($request->ajax());
+      
         $home = Home::get();
         $about = About::first();
-        $whats = WhatIDo::get();
-        $des_array = WhatIDo::Select(['description'])->get();
-      
+        $whattitle = WhatIDo::first();
+        //$des_array = WhatIDo::Select(['description'])->paginate(2);
+        $whats = WhatIDo::paginate(2);
+        // dd($whats);
+       
         $items = array();
        
-            foreach($des_array as $des_arr) {
+            foreach($whats as $des_arr) {
    
                $string = $des_arr->description;
-               //dd(strlen($string));
+              // dd($string);
                //$limit_des = str::of($string)->words(20);
                $limit_des = substr($string,0,71);
               // dd($limit_des);
                $items[] = $limit_des;
-              
                
-          }
-         // dd($length);
-         /* foreach($length as $lengthno){
-            echo $lengthno;
-          }*/
-        //dd("dhfkdn");
-        $whatedit = WhatIDo::first();
+              // dd($items);
         
-        return view('admin.contents.index',compact('home','about','whats','whatedit','items'));
+          }
+         
+       // dd($items);
+        
+      $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle','items'));
+           // dd($view);
+        
+        if ($request->ajax()) {
+           
+            $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle','items'))->render();
+           
+            return response()->json(['html' => $view]);
+           /* return response()->json([
+                'home'     => $home,
+                'about'    =>$about,
+                'whattitle'=>$whattitle,
+                'whats'    =>whats,
+                'items'    => $items 
+                ]);*/
+        }
+        
+       // dd($request);
+      
+        return view('admin.contents.index',compact('home','about','whattitle','whats','items'));
     }
 
     public function postLogin(Request $request){

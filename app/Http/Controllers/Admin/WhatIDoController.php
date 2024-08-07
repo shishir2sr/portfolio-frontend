@@ -18,7 +18,7 @@ class WhatIDoController extends Controller
     {
         //
         $whatedit = WhatIDo::first();
-        dd($whatedit);
+       // dd($whatedit);
         return view('admin.contents.index',compact('whatedit'));
     }
 
@@ -29,7 +29,7 @@ class WhatIDoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.contents.whatido_edit');
     }
 
     /**
@@ -40,7 +40,9 @@ class WhatIDoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        WhatIDo::create($request->all());
+        return redirect('/admindashboard')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -82,8 +84,11 @@ class WhatIDoController extends Controller
     {
         //
        
-        $input = $request->all();
-        //dd($input);
+       $inputs = $request->all();
+       
+       $des = $request->description;
+       $strip = preg_replace('/<p[^>]*>(.*?)<\/p>/i', '$1', $des);
+       //dd($strip);
         $n = WhatIDo::all();
         foreach($n as $m){
            
@@ -97,7 +102,12 @@ class WhatIDoController extends Controller
        
         $what = WhatIDo::find($id); 
        
-        $what->update($input);
+        $what->update([
+            'topic_name' => $request->topic_name,
+            'description' =>$strip,
+            //'icon' => $request->icon
+
+        ]);
         
 
         return redirect('/admindashboard');
@@ -116,17 +126,8 @@ class WhatIDoController extends Controller
     public function loadMoreData(Request $request)
     {
         
-       
+        //dd($request->ajax());
         $id = $request->id;
-       
-      // dd($request->start);
-       //dd($start);
-       /* $data = WhatIDo::orderBy('id', 'ASC')
-            ->offset($start)
-            ->limit(2)
-            ->get();*/
-     
-
     
      // $id='3';
       $data = WhatIDo::find($id);
@@ -148,5 +149,16 @@ class WhatIDoController extends Controller
             'rest_data' => $rest_data,
            
         ]);
+    }
+
+    public function pagination(Request $request,$id){
+
+       // dd($request->ajax());
+        $whats = WhatIDo::paginate(3);
+        if ($request->ajax()) {
+            Log::info('AJAX request received');
+            return view('admin.contents.index', compact('whats'))->render();
+        }
+        return view('admin.contents.index', compact('whats'));
     }
 }
