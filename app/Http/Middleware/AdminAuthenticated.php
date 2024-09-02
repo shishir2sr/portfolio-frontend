@@ -26,7 +26,7 @@ class AdminAuthenticated{
         }
         else{
           //  dd('jkl');
-            return redirect (route('adminLogin'));
+            return redirect (route('index'));
         }
     }
 }

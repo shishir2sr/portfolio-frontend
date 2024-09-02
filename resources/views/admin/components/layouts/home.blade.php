@@ -14,7 +14,9 @@
               <div class="mh-promo wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
                 <span>Hello I'm</span>
                 @foreach($home as $homes)
+                @if(auth()->guard('admin')->check())
                 <a href="{{route('home-edit.edit',$homes->id)}}">Edit</a>
+                @endif
               </div>
             
               <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">{{$homes->name}}</h2>
@@ -47,10 +49,6 @@
           </div>
           <div class="col-sm-6">
             <div class="hero-img wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.6s">
-            <div class="mh-promo wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s">
-                <a href="{{route('home-edit.create')}}">Add</a>
-              </div>
-              
               <div class="img-border">
                 <img src="{{URL::asset('/storage/adminimage/'.$homes->profile_image)}}" alt="Photo of Yeasir Arefin Tusher"
                   class="img-fluid">

@@ -17,8 +17,21 @@
     <!-- ico font -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets\admin\icon\icofont\css\icofont.css')}}">
     {{-- CKEditor CDN --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
-    
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/
+    ckeditor5-premium-features.css" />
+   <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+   <!-- <script type = "importmap">
+    {
+            "imports": {
+                "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+                "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/",
+                "ckeditor5-premium-features": "https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/ckeditor5-premium-features.js",
+                "ckeditor5-premium-features/": "https://cdn.ckeditor.com/ckeditor5-premium-features/43.0.0/"
+            }
+        }
+    </script>
+    <script type="module" src="{{ URL::asset('assets/vendor/ckeditor5.js') }}"></script>-->
 </head>
 <body>
     
@@ -95,10 +108,12 @@
 </body>    
 
 <script>
-            ClassicEditor.create( document.querySelector( '#des' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
+        ClassicEditor
+        .create( document.querySelector( '#des' ))
+        
+        .catch( error => {
+            console.error( error );
+        } );
         </script>                                
 </html>   
     <!-- Basic Form Inputs card end -->

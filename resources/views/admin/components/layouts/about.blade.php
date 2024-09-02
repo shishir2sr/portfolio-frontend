@@ -11,17 +11,19 @@
           <div class="mh-about-inner">
             <div class="row">
               <div class = "col col-md-auto">
-                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px" >About me<main></main></h2>
+                <h2 class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px" >{{$about->title}}<main></main></h2>
               </div>
+              @if(auth()->guard('admin')->check())
                 <div class = "col col-md-auto my-4">
                  <a class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px" 
-                  
-                 href = "{{route('about-edit.edit',$about->id)}}">Edit</a>
-                  
+                  href = "{{route('about-edit.edit',$about->id)}}">Edit</a>
                 </div>
-              </div>
+              @endif
+            </div>
             
             <p class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+              {{$about->greet}}
+              <br>
               <!--Hello there, 
              <br> I am an experienced
               computer engineer with a specialization in Software Engineering, Mobile Application Development & Machine
@@ -30,29 +32,7 @@
               writing clean, reusable, and test-driven code. I'm passionate about innovation and dedicated to delivering
               impactful results. Let's collaborate and bring your ideas to life!
             </p>-->
-            <?php
-
-
-                      $des = $about->description;
-        
-                      $split = explode(" ",$des);
-                      
-                      $length = count($split);
-                     
-                      for($i=0; $i<=$length; $i++){
-
-                            
-                            if($i==1){
-                              echo $split[$i]."<br>";
-                              }
-                              elseif(isset($split[$i])){
-                                
-                                echo $split[$i]." ";
-                                }
-                            
-                          }
-
-            ?>
+            {{$about->description}}
             <div class="mh-about-tag wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
               <ul>
                <!-- <li><span>UIKit</span></li>
@@ -78,9 +58,7 @@
                 <?php
 
                       $skills = $about->add_skills;
-        
                       $split = explode(",",$skills);
-                      
                       $length = count($split);
                  ?>   
                       @foreach($split as $splits)

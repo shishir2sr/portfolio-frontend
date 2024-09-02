@@ -45,7 +45,7 @@
   <!-- Custom CSS-->
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <link rel='stylesheet' href="assets/css/login.css">
+  
   <!-- Colors -->
   <link rel="alternate stylesheet" href="assets/css/colors/blue.css" title="blue">
   <link rel="stylesheet" href="assets/css/colors/defauld.css" title="defauld">
@@ -57,14 +57,45 @@
   <link rel="alternate stylesheet" href="assets/css/colors/yellow.css" title="yellow">
   <link rel="alternate stylesheet" href="assets/css/index.css" title="index">
   
- <!-- Bootstrap CSS (start popup)-->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
-<!-- Font Awesome CSS -->
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
-<link rel='stylesheet' href="assets/css/login.css">
-<!--End popup-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <!--
+    ==============
+    * JS Files *
+    ==============
+    -->
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- jQuery -->
+  <script src="assets/plugins/js/jquery.min.js"></script>
+  <!-- jquery nav -->
+  <script src="assets/plugins/js/jquery.nav.js"></script>
+  <!-- popper -->
+  <script src="assets/plugins/js/popper.min.js"></script>
+  <!-- bootstrap -->
+  <script src="assets/plugins/js/bootstrap.min.js"></script>
+  <!-- owl carousel -->
+  <script src="assets/plugins/js/owl.carousel.js"></script>
+  <!-- validator -->
+  <script src="assets/plugins/js/validator.min.js"></script>
+  <!-- wow -->
+  <script src="assets/plugins/js/wow.min.js"></script>
+  <!-- mixin js-->
+  <script src="assets/plugins/js/jquery.mixitup.min.js"></script>
+  <!-- circle progress-->
+  <script src="assets/plugins/js/circle-progress.js"></script>
+
+  <!-- Fancybox js-->
+  <script src="assets/plugins/js/jquery.fancybox.min.js"></script>
+  <!-- isotope js-->
+  <script src="assets/plugins/js/isotope.pkgd.js"></script>
+  <script src="assets/plugins/js/packery-mode.pkgd.js"></script>
+  <!-- Map api -->
+  <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
+  <!-- Custom Scripts-->
+  <script src="assets/js/map-init.js"></script>
+  <script src="assets/js/custom-scripts.js"></script>
+
 </head>
 
 
@@ -85,7 +116,7 @@
         -->
   <!--Header part-->
   
-            @include('admin.components.layouts.header') 
+  @include('admin.components.layouts.header') 
         
   <!--
         ===================
@@ -150,101 +181,6 @@
 @include('admin.components.layouts.footer')  
 
 
-
-    <!--pop up-->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-title text-center">
-          <h4>Login</h4>
-        </div>
-        <div class="d-flex flex-column text-center">
-          <form action = "{{route('adminLoginPost')}}" method = "post">
-            @csrf
-            <div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="Your email address...">
-              @if ($errors->has('email'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                            @endif
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Your password...">
-              @if ($errors->has('password'))
-                            <span class="help-block font-red-mint">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                            @endif
-            </div>
-            <button type="submit" class="btn btn-info" >Login</button>
-          </form>
-          
-          <div class="text-center text-muted delimiter">or use a social network</div>
-          <div class="d-flex justify-content-center social-buttons">
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
-              <i class="fab fa-twitter"></i>
-            </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
-              <i class="fab fa-facebook"></i>
-            </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
-              <i class="fab fa-linkedin"></i>
-            </button>
-        </div>
-      </div>
-    </div>
-
-      <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.</div>
-      </div>
-  </div>
-</div>
-<!--End popup-->
-  <!--
-    ==============
-    * JS Files *
-    ==============
-    -->
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-  <!-- jQuery -->
-  <script src="assets/plugins/js/jquery.min.js"></script>
-  <!-- popper -->
-  <script src="assets/plugins/js/popper.min.js"></script>
-  <!-- bootstrap -->
-  <script src="assets/plugins/js/bootstrap.min.js"></script>
-  <!-- owl carousel -->
-  <script src="assets/plugins/js/owl.carousel.js"></script>
-  <!-- validator -->
-  <script src="assets/plugins/js/validator.min.js"></script>
-  <!-- wow -->
-  <script src="assets/plugins/js/wow.min.js"></script>
-  <!-- mixin js-->
-  <script src="assets/plugins/js/jquery.mixitup.min.js"></script>
-  <!-- circle progress-->
-  <script src="assets/plugins/js/circle-progress.js"></script>
-  <!-- jquery nav -->
-  <script src="assets/plugins/js/jquery.nav.js"></script>
-  <!-- Fancybox js-->
-  <script src="assets/plugins/js/jquery.fancybox.min.js"></script>
-  <!-- isotope js-->
-  <script src="assets/plugins/js/isotope.pkgd.js"></script>
-  <script src="assets/plugins/js/packery-mode.pkgd.js"></script>
-  <!-- Map api -->
-  <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
-  <!-- Custom Scripts-->
-  <script src="assets/js/map-init.js"></script>
-  <script src="assets/js/custom-scripts.js"></script>
-
-
   <!-- ****************
       After neccessary customization/modification, Please minify 
       JavaScript/jQuery according to http://browserdiet.com/en/ for better performance
@@ -259,26 +195,16 @@
   </div>
 
   <!-- jQuery for popup -->
-<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<!--<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
  Popper JS 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
  Bootstrap JS -
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
 
-<!--<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
 
-<script>
 
-    $(document).ready(function() {             
-    $('#loginModal').modal('hide');
-    
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-   });
-
-</script>
 
 </body>
 

@@ -141,7 +141,7 @@ class WhatIDoController extends Controller
      //$length = strlen($data->description);
     
     // dd($count);
-     $rest_data = substr($data->description,71);
+     $rest_data = substr($data->description,85);
      
      //dd($rest_data);
 
@@ -151,14 +151,4 @@ class WhatIDoController extends Controller
         ]);
     }
 
-    public function pagination(Request $request,$id){
-
-       // dd($request->ajax());
-        $whats = WhatIDo::paginate(3);
-        if ($request->ajax()) {
-            Log::info('AJAX request received');
-            return view('admin.contents.index', compact('whats'))->render();
-        }
-        return view('admin.contents.index', compact('whats'));
-    }
 }

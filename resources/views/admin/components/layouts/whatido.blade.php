@@ -36,27 +36,15 @@ integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="ano
             <h5 id = "topic">{{$what->topic_name}}</h5>
             
                 <p id ='items_container-{{$what->id}}' style="display:inline;margin:0">
-                  <?php 
-                    $item_length = count($items);
-                  
-                    while($i<$item_length ){
-                      
-                      echo $items[$i];
-                      break;
-                  }
-                  
-                  $i++;
-                  
-                  ?></p><a class="wow fadeInUp toggle-button" data-wow-duration="0.8s" data-wow-delay="0.1s"  
-                          data-item-id = "{{$what->id}}" style="display:inline;margin:0">...Read More</a> 
-                 
+                {!! $what->description !!}
+                </p><!--<a class="wow fadeInUp toggle-button" data-wow-duration="0.8s" data-wow-delay="0.1s"  
+                          data-item-id = "{{$what->id}}" style="display:inline;margin:0">...Read More</a> -->
+            @if(auth()->guard('admin')->check())     
             <div class = "col col-md-auto my-4">
               <a class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px" 
-                      
-                      href = "{{route('whatido-edit.edit',$what->id)}}">Edit</a>
-                        
+               href = "{{route('whatido-edit.edit',$what->id)}}">Edit</a>
             </div>
-
+            @endif
           </div>
         </div>
         
@@ -157,44 +145,7 @@ $(document).ready(function() {
   //var originalContents = {}; // Object to store original content
 
   // Function to handle the toggle click event
-  function handleToggleClick() {
-    var $this = $(this);
-    var itemId = $this.data('item-id');
-    var contentBox = $('#items_container-' + itemId);
-    var isExpanded = contentBox.data('expanded');
-   //var isExpanded = false;
-    var originalContents = contentBox.data('original-content');
-    
-    if (!isExpanded) {
-      
-      $.ajax({
-        url: "{{ route('load.more') }}",
-        method: "GET",
-        data: { 'id': itemId },
-        dataType: "json",
-        success: function(rest_data) {
-          var html = rest_data.rest_data;
-          var y =contentBox.data('original-content',contentBox.html());
-          //console.log(y.text());
-          contentBox.append(html);
-          $this.text('Read Less');
-          contentBox.data('expanded', true);
-        },
-        error: function(xhr, status, error) {
-          console.error('AJAX error:', error);
-        }
-      });
-    } else {
-      console.log('lkdfj');
-      var x= contentBox.html(originalContents);
-      console.log(x.text());
-      $this.text('...Read More');
-      contentBox.data('expanded', false);
-    }
-  }
-
-  // Initial binding of toggle-button click events
-  $(document).off('click').on('click', '.toggle-button', handleToggleClick);
+  
 
   // Pagination click handler
   $(document).on('click', '.pagination a', function(event) {
@@ -206,7 +157,7 @@ $(document).ready(function() {
   // Function to fetch data for pagination
   function fetch_data(page) {
     $.ajax({
-      url: "{{ route('adminLogin') }}",
+      url: "{{ route('index') }}",
       type: "GET",
       data: { page: page },
       dataType: "json",

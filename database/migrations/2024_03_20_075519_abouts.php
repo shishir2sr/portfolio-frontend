@@ -16,10 +16,11 @@ return new class extends Migration
         //
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable;
+            $table->string('greet')->nullable;
             $table->string('description')->nullable;
             $table->string('cv')->nullable;
             $table->string('image')->nullable;
-        
             $table->string('add_skills')->nullable;
             $table->timestamps();
         });

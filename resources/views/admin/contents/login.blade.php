@@ -3,12 +3,13 @@
 <html lang="en">
 
 <head>
-    
-<!-- Bootstrap CSS -->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+
+ <!-- Bootstrap CSS (start popup)-->
+ <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
 <!-- Font Awesome CSS -->
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
-<link rel='stylesheet' href="resources/css/login.css">
+<link rel='stylesheet' href="assets/css/login.css">
+<!--End popup-->
 
 </head>
 <body>
@@ -31,14 +32,25 @@
           <h4>Login</h4>
         </div>
         <div class="d-flex flex-column text-center">
-          <form>
+        <form action = "{{route('adminLoginPost')}}" method = "post">
+            @csrf
             <div class="form-group">
-              <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+              <input type="email" class="form-control" name="email" placeholder="Your email address...">
+              @if ($errors->has('email'))
+                            <span class="help-block font-red-mint">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                            @endif
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="password1" placeholder="Your password...">
+              <input type="password" class="form-control" name="password" placeholder="Your password...">
+              @if ($errors->has('password'))
+                            <span class="help-block font-red-mint">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                            @endif
             </div>
-            <button type="button" class="btn btn-info btn-block btn-round">Login</button>
+            <button type="submit" class="btn btn-info" >Login</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>

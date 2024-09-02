@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Log;
 class AdminAuthController extends Controller
 {
     //
-    public function getLogin(Request $request){
+    public function index(Request $request){
        
       // dd($request->ajax());
       
@@ -32,17 +32,17 @@ class AdminAuthController extends Controller
         $about = About::first();
         $whattitle = WhatIDo::first();
         //$des_array = WhatIDo::Select(['description'])->paginate(2);
-        $whats = WhatIDo::paginate(2);
+        $whats = WhatIDo::paginate(3);
         // dd($whats);
        
-        $items = array();
+       /* $items = array();
        
             foreach($whats as $des_arr) {
    
                $string = $des_arr->description;
               // dd($string);
                //$limit_des = str::of($string)->words(20);
-               $limit_des = substr($string,0,71);
+               $limit_des = substr($string,0,85);
               // dd($limit_des);
                $items[] = $limit_des;
                
@@ -50,28 +50,22 @@ class AdminAuthController extends Controller
         
           }
          
-       // dd($items);
+       // dd($items);*/
         
-      $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle','items'));
+      $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle'));
            // dd($view);
         
         if ($request->ajax()) {
            
-            $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle','items'))->render();
+            $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle',))->render();
            
             return response()->json(['html' => $view]);
-           /* return response()->json([
-                'home'     => $home,
-                'about'    =>$about,
-                'whattitle'=>$whattitle,
-                'whats'    =>whats,
-                'items'    => $items 
-                ]);*/
+        
         }
         
        // dd($request);
       
-        return view('admin.contents.index',compact('home','about','whattitle','whats','items'));
+        return view('admin.contents.index',compact('home','about','whattitle','whats'));
     }
 
     public function postLogin(Request $request){
@@ -102,7 +96,7 @@ class AdminAuthController extends Controller
         auth()->guard('admin')->logout();
         Session::flush();
         Session::put('Success', 'You are logout successfully');
-        return redirect()->route('adminLogin');
+        return redirect()->route('index');
     }
 }
 
