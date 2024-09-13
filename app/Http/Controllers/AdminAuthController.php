@@ -33,7 +33,7 @@ class AdminAuthController extends Controller
         $whattitle = WhatIDo::first();
         //$des_array = WhatIDo::Select(['description'])->paginate(2);
         $whats = WhatIDo::get();
-         dd($whats);
+        // dd($whats);
        
        /* $items = array();
        

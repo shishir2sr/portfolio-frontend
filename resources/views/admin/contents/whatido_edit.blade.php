@@ -114,7 +114,7 @@
         .catch( error => {
             console.error( error );
         } );
-        </script>                                
-</html>   
+        </script>
+</html>
     <!-- Basic Form Inputs card end -->
 

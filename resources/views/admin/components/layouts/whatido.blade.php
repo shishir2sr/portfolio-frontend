@@ -28,10 +28,19 @@ integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="ano
 <section class="mh-service">
   <div class="container">
     <div class="row section-separator">
-      
+        @if(!auth()->guard('admin')->check())
         <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
           <h2>{{$whattitle->title}}</h2>
         </div>
+       @else
+        <div class="col-sm-6 text-right section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
+          <h2>{{$whattitle->title}}</h2>
+        </div>
+        <div class="col-sm-6 text-right section-title wow fadeInUp">
+                <a href = "{{route('whatido-edit.create')}}"><img src="./assets/images/plus.png" alt="Add more"
+                ></a>
+        </div>
+        @endif
         <?php $i = 0;?>
     
       <div class="slide-content swiper" id="swiper">
@@ -148,9 +157,7 @@ integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="ano
           </div>-->
           
             
-              <!--<div class="addbutton">
-                <a href = "{{route('whatido-edit.create')}}"> <button type="submit" class="btn btn-primary" >Add more..</button></a>
-              </div>-->
+              
           
        
       
