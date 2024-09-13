@@ -23,7 +23,7 @@ class UserController extends Controller
         $about = About::first();
         $whattitle = WhatIDo::first();
         //$des_array = WhatIDo::Select(['description'])->paginate(2);
-        $whats = WhatIDo::paginate(3);
+        $whats = WhatIDo::get();
         
       $view = view('admin.components.layouts.whatido', compact('home','about','whats','whattitle'));
            // dd($view);

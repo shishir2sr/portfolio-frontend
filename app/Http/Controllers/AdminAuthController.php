@@ -32,8 +32,8 @@ class AdminAuthController extends Controller
         $about = About::first();
         $whattitle = WhatIDo::first();
         //$des_array = WhatIDo::Select(['description'])->paginate(2);
-        $whats = WhatIDo::paginate(3);
-        // dd($whats);
+        $whats = WhatIDo::get();
+         dd($whats);
        
        /* $items = array();
        

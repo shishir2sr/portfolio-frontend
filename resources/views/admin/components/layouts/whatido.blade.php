@@ -4,29 +4,42 @@ use Illuminate\Support\Str;
 
 ?>
 <head>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"
-integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script> 
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<script src="assets/plugins/js/jquery.nav.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script> <!-- Using CDN -->
+<head>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/swiper.css">
+  <!-- jQuery (if you need it) -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <!-- Swiper JS -->
+  <script src="assets/js/swiper.bundle.min.js"></script>
+
+  <!-- Your custom script -->
+  <script src="assets/js/script.js"></script>
+ <!-- <script src="assets/plugins/js/jquery.nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script> Using CDN -->
+</head>
+
+<!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script> -->
+
+
 </head>
 <section class="mh-service">
-    <div class="container">
-      <div class="row section-separator">
+  <div class="container">
+    <div class="row section-separator">
       
         <div class="col-sm-12 text-center section-title wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">
-
-        
           <h2>{{$whattitle->title}}</h2>
-         
-              
         </div>
         <?php $i = 0;?>
+    
+      <div class="slide-content swiper" id="swiper">
+      <div class="swiper-wrapper">
         @foreach($whats as $what)
-
-        
-        <div class="col-sm-4" id= "mh-container" >
-          <div class="mh-service-item shadow-1 dark-bg wow fadeInUp"  data-wow-duration="0.8s" data-wow-delay="0.5s">
+      
+        <div class="swiper-slide" id= "mh-container" >
+          <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" id="slide" data-wow-duration="0.8s" data-wow-delay="0.5s">
             <div style="padding-top: 18px; padding-bottom: 12px;">
               <img src="./assets/images/yeasir_arefin_tusher_CrossPlatformServiceLogo.png" alt="Yeasir Arefin Tusher AI Service Logo"
                 style="height: 35px; width: 35px;">
@@ -37,20 +50,31 @@ integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="ano
             
                 <p id ='items_container-{{$what->id}}' style="display:inline;margin:0">
                 {!! $what->description !!}
-                </p><!--<a class="wow fadeInUp toggle-button" data-wow-duration="0.8s" data-wow-delay="0.1s"  
-                          data-item-id = "{{$what->id}}" style="display:inline;margin:0">...Read More</a> -->
-            @if(auth()->guard('admin')->check())     
+                </p>
+            @if(auth()->guard('admin')->check())
             <div class = "col col-md-auto my-4">
-              <a class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px" 
+              <a class="wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.1s" margin-right="6em" width="2px"
                href = "{{route('whatido-edit.edit',$what->id)}}">Edit</a>
             </div>
             @endif
-          </div>
+         
         </div>
-        
-        @endforeach
-       {!! $whats->links() !!}
-        
+       </div>
+
+    @endforeach
+
+    </div>
+              <div class="swiper-button-next swiper-navbtn"></div>
+              <div class="swiper-button-prev swiper-navbtn"></div>
+              <div class="swiper-pagination"></div>
+
+   </div>
+  
+  </div>
+</div>
+</section>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/swiper.bundle.min.js"></script>
         <!--<div class="col-sm-4">
           <div class="mh-service-item shadow-1 dark-bg wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
 
@@ -122,16 +146,15 @@ integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="ano
             </div>
           
           </div>-->
-          <div class="addbutton">
-            <a href = "{{route('whatido-edit.create')}}"> <button type="submit" class="btn btn-primary" >Add more..</button></a>
-          </div>
           
-        </div>
+            
+              <!--<div class="addbutton">
+                <a href = "{{route('whatido-edit.create')}}"> <button type="submit" class="btn btn-primary" >Add more..</button></a>
+              </div>-->
+          
        
-      </div>
       
-    </div>
-  </section>
+   
 <script>
 $.ajaxSetup({
         headers: {
@@ -148,7 +171,7 @@ $(document).ready(function() {
   
 
   // Pagination click handler
-  $(document).on('click', '.pagination a', function(event) {
+  /*$(document).on('click', '.pagination a', function(event) {
     event.preventDefault();
     var page = $(this).attr('href').split('page=')[1];
     fetch_data(page);
@@ -175,7 +198,8 @@ $(document).ready(function() {
         console.error('AJAX error:', error);
       }
     });
-  }
+  }*/
+ 
 
   
 });
